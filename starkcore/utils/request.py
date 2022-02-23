@@ -32,7 +32,6 @@ def fetch(host, sdk_version, user, method, path, payload=None, query=None,
     url = {
         Environment.production:  "https://api.{service}.com/",
         Environment.sandbox:     "https://sandbox.api.{service}.com/",
-        Environment.development: "https://development.api.{service}.com/",
     }[user.environment].format(service=service) + api_version
 
     url = "{base_url}/{path}{query}".format(base_url=url, path=path, query=urlencode(query))

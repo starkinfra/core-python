@@ -170,15 +170,15 @@ def delete_id(sdk_version, host, api_version, user, resource, id, language, time
     return from_api_json(resource, entity)
 
 
-def patch_id(sdk_version, host, api_version, user, resource, id, language, timeout, **payload):
-    payload = cast_json_to_api_format(payload)
+def patch_id(sdk_version, host, api_version, user, resource, id, payload, language, timeout, **query):
     json = fetch(
         host=host,
         sdk_version=sdk_version,
         user=user,
         method=patch,
         path="{endpoint}/{id}".format(endpoint=endpoint(resource), id=id),
-        payload=payload,
+        payload=cast_json_to_api_format(payload),
+        query=query,
         api_version=api_version,
         language=language,
         timeout=timeout,

@@ -6,7 +6,7 @@ class Project(User):
     The Project object is an authentication entity for the SDK that is permanently
     linked to a specific Workspace.
     All requests to the Stark Bank API must be authenticated via an SDK user,
-    which must have been previously created at the Stark Bank website
+    which must have been previously created at the Stark Bank or Stark Infra websites
     [https://web.sandbox.starkbank.com] or [https://web.starkbank.com]
     before you can use it in this SDK. Projects may be passed as the user parameter on
     each request or may be defined as the default user at the start (See README).

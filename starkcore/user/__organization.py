@@ -7,8 +7,8 @@ class Organization(User):
     represents your entire Organization, being able to access any Workspace
     underneath it and even create new Workspaces. Only a legal representative
     of your organization can register or change the Organization credentials.
-    All requests to the Stark Bank and Stark infra API must be authenticated via an SDK user,
-    which must have been previously created at the Stark Bank and Stark Infra websites
+    All requests to the Stark Bank and Stark Infra API must be authenticated via an SDK user,
+    which must have been previously created at the Stark Bank or Stark Infra websites
     [https://web.sandbox.starkbank.com] or [https://web.starkbank.com]
     before you can use it in this SDK. Organizations may be passed as the user parameter on
     each request or may be defined as the default user at the start (See README).
