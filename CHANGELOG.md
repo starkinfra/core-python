@@ -13,5 +13,7 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 
 ## [Unreleased]
+
+## [0.0.2] - 2022-03-14
 ### Added
 - starkcore API basic functionalities for starkbank and starkinfra 
