@@ -8,7 +8,7 @@ from tests.utils.user import exampleProject
 class Transaction(Resource):
 
     def __init__(self, id, amount):
-        super().__init__(id=id)
+        Resource.__init__(self, id=id)
         self.amount = amount
 
 
