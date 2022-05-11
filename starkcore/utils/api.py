@@ -1,5 +1,5 @@
 from datetime import date, datetime, timedelta
-from .resource import Resource
+from .subresource import SubResource
 from .case import camel_to_kebab, snake_to_camel, camel_to_snake
 
 
@@ -28,7 +28,7 @@ def cast_values(value):
     if isinstance(value, timedelta):
         return int(value.total_seconds())
 
-    if isinstance(value, Resource):
+    if isinstance(value, SubResource):
         return api_json(value)
 
     if isinstance(value, dict):

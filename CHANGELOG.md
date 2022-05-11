@@ -13,6 +13,8 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 
 ## [Unreleased]
+### Added
+- SubResource cast on api.cast_values method
 
 ## [0.0.2] - 2022-03-14
 ### Added
