@@ -30,7 +30,7 @@ def check_language(language):
 
 
 def check_datetime_or_date(data):
-    if data is None or "*" in data:
+    if data is None or (isinstance(data, str) and "*" in data):
         return None
 
     if type(data) == datetime:
@@ -45,7 +45,7 @@ def check_datetime_or_date(data):
 
 
 def check_datetime(data):
-    if data is None or "*" in data:
+    if data is None or (isinstance(data, str) and "*" in data):
         return None
 
     if type(data) == datetime:
