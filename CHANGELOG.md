@@ -13,6 +13,8 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 
 ## [Unreleased]
+
+## [0.0.6] - 2022-07-04
 ### Added
 - verify function outside parse_and_verify
 
