@@ -7,11 +7,14 @@ from .rest import get_raw
 
 
 def parse_and_verify(content, signature, sdk_version, api_version, host, resource, user, language, timeout, key=None):
+    content = verify(content, signature, sdk_version, api_version, host, user, language, timeout)
     json = loads(content)
     if key:
         json = json[key]
-    request = from_api_json(resource=resource, json=json)
+    return from_api_json(resource=resource, json=json)
 
+
+def verify(content, signature, sdk_version, api_version, host, user, language, timeout):
     try:
         signature = Signature.fromBase64(signature)
     except:
@@ -26,7 +29,7 @@ def parse_and_verify(content, signature, sdk_version, api_version, host, resourc
         timeout=timeout,
     )
     if _is_signature_valid(content=content, signature=signature, public_key=public_key):
-        return request
+        return content
 
     public_key = _get_public_key(
         sdk_version=sdk_version,
@@ -38,7 +41,7 @@ def parse_and_verify(content, signature, sdk_version, api_version, host, resourc
         refresh=True,
     )
     if _is_signature_valid(content=content, signature=signature, public_key=public_key):
-        return request
+        return content
 
     raise InvalidSignatureError("The provided signature and content do not match the public key")
 
@@ -47,10 +50,13 @@ def _is_signature_valid(content, signature, public_key):
     if Ecdsa.verify(message=content, signature=signature, publicKey=public_key):
         return True
 
-    normalized = dumps(loads(content), sort_keys=True)
-    if Ecdsa.verify(message=normalized, signature=signature, publicKey=public_key):
-        return True
+    try:
+        normalized = dumps(loads(content), sort_keys=True)
+    except:
+        return False
 
+    if Ecdsa.verify(message=normalized, signature=signature, publicKey=public_key):
+       return True
     return False
 
 
