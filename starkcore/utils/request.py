@@ -25,8 +25,9 @@ def fetch(host, sdk_version, user, method, path, payload=None, query=None,
     language = check_language(language)
 
     service = {
-        StarkHost.bank: "starkbank",
         StarkHost.infra: "starkinfra",
+        StarkHost.bank: "starkbank",
+        StarkHost.sign: "starksign",
     }[host]
 
     url = {
