@@ -14,6 +14,7 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 ## [Unreleased]
 
+## [0.0.7] - 2022-09-07
 ### Added
 - starksign to hosts
 - PublicUser to enable public route access without credentials
