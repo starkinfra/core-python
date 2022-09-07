@@ -13,6 +13,8 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 
 ## [Unreleased]
+### Fixed
+- Non-strict JSON parsing on parse_and_verify
 
 ## [0.0.7] - 2022-09-07
 ### Added
