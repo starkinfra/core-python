@@ -8,7 +8,7 @@ from .rest import get_raw
 
 def parse_and_verify(content, signature, sdk_version, api_version, host, resource, user, language, timeout, key=None):
     content = verify(content, signature, sdk_version, api_version, host, user, language, timeout)
-    json = loads(content)
+    json = loads(content, strict=False)
     if key:
         json = json[key]
     return from_api_json(resource=resource, json=json)
