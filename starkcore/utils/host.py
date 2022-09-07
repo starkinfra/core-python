@@ -5,3 +5,4 @@ class StarkHost(Enum):
 
     infra = "infra"
     bank = "bank"
+    sign = "sign"

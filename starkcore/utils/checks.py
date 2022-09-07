@@ -18,8 +18,8 @@ def check_private_key(pem):
 
 
 def check_user(user):
-    from ..user.__user import User
-    assert isinstance(user, User), "A user is required to access our API. Check our README: https://github.com/starkinfra/core-python/"
+    if not user:
+        raise AssertionError("A user is required to access our API. Check our README: https://github.com/starkinfra/core-python/")
     return user
 
 

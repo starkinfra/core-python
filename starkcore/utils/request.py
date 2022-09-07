@@ -7,6 +7,7 @@ from ..error import InternalServerError, InputErrors, UnknownError
 from .host import StarkHost
 from .url import urlencode
 from .checks import check_user, check_language
+from ..user.__publicuser import PublicUser
 
 
 class Response:
@@ -25,8 +26,9 @@ def fetch(host, sdk_version, user, method, path, payload=None, query=None,
     language = check_language(language)
 
     service = {
-        StarkHost.bank: "starkbank",
         StarkHost.infra: "starkinfra",
+        StarkHost.bank: "starkbank",
+        StarkHost.sign: "starksign",
     }[host]
 
     url = {
@@ -44,23 +46,19 @@ def fetch(host, sdk_version, user, method, path, payload=None, query=None,
         sdk_version=sdk_version,
     )
 
-    access_time = str(time())
     body = dumps(payload) if payload else ""
-    message = "{access_id}:{access_time}:{body}".format(access_id=user.access_id(), access_time=access_time, body=body)
-    signature = Ecdsa.sign(message=message, privateKey=user.private_key()).toBase64()
+    headers = {
+        "User-Agent": agent,
+        "Accept-Language": language,
+        "Content-Type": "application/json",
+    }
+    headers.update(_authentication_headers(user=user, body=body))
 
     try:
         request = method(
             url=url,
             data=body,
-            headers={
-                "Access-Id": user.access_id(),
-                "Access-Time": access_time,
-                "Access-Signature": signature,
-                "Content-Type": "application/json",
-                "User-Agent": agent,
-                "Accept-Language": language,
-            },
+            headers=headers,
             timeout=timeout,
         )
     except Exception as exception:
@@ -76,3 +74,18 @@ def fetch(host, sdk_version, user, method, path, payload=None, query=None,
         raise UnknownError(response.content)
 
     return response
+
+
+def _authentication_headers(user, body):
+    if isinstance(user, PublicUser):
+        return {}
+
+    access_time = str(time())
+    message = "{access_id}:{access_time}:{body}".format(access_id=user.access_id(), access_time=access_time, body=body)
+    signature = Ecdsa.sign(message=message, privateKey=user.private_key()).toBase64()
+
+    return {
+        "Access-Id": user.access_id(),
+        "Access-Time": access_time,
+        "Access-Signature": signature,
+    }

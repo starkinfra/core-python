@@ -154,6 +154,27 @@ def post_single(sdk_version, host, api_version, user, resource, entity, language
     return from_api_json(resource, entity_json)
 
 
+def post_sub_resource(sdk_version, host, api_version, user, resource, id, sub_resource, entity, language, timeout):
+    payload = api_json(entity)
+    json = fetch(
+        host=host,
+        sdk_version=sdk_version,
+        user=user,
+        method=post,
+        path="{endpoint}/{id}/{sub_resource}".format(
+            endpoint=endpoint(resource),
+            id=id,
+            sub_resource=endpoint(sub_resource),
+        ),
+        payload=payload,
+        api_version=api_version,
+        language=language,
+        timeout=timeout,
+    ).json()
+    entity_json = json[last_name(sub_resource)]
+    return from_api_json(sub_resource, entity_json)
+
+
 def delete_id(sdk_version, host, api_version, user, resource, id, language, timeout, **query):
     json = fetch(
         host=host,

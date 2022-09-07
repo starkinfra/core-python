@@ -14,6 +14,11 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 ## [Unreleased]
 
+### Added
+- starksign to hosts
+- PublicUser to enable public route access without credentials
+- post_sub_resource to rest utils
+
 ## [0.0.6] - 2022-07-04
 ### Added
 - verify function outside parse_and_verify
