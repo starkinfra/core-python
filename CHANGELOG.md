@@ -14,6 +14,10 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 ## [Unreleased]
 
+## [0.0.9] - 2022-10-07
+### Fixed
+- Fixed query() cursor and limit iteration
+
 ## [0.0.8] - 2022-09-07
 ### Fixed
 - Non-strict JSON parsing on parse_and_verify
