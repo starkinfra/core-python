@@ -40,9 +40,9 @@ def get_stream(sdk_version, host, api_version, user, resource, language, timeout
 
         if limit:
             limit -= 100
-            query["limit"] = min(limit, 100)
+            limit_query["limit"] = min(limit, 100)
 
-        query["cursor"] = cursor
+        limit_query["cursor"] = cursor
         if not cursor or (limit is not None and limit <= 0):
             break
 
