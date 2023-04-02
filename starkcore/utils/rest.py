@@ -220,3 +220,18 @@ def get_raw(sdk_version, host, api_version, path, user, language, timeout, **que
         language=language,
         timeout=timeout,
     ).json()
+
+
+def post_raw(sdk_version, host, api_version, path, payload, user, language, timeout, **query):
+    return fetch(
+        host=host,
+        sdk_version=sdk_version,
+        user=user,
+        method=post,
+        path=path,
+        payload=payload,
+        query=query,
+        api_version=api_version,
+        language=language,
+        timeout=timeout,
+    ).json()

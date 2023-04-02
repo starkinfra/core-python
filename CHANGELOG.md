@@ -13,6 +13,8 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 
 ## [Unreleased]
+### Added
+- post_raw to rest utils
 
 ## [0.0.9] - 2022-10-07
 ### Fixed
