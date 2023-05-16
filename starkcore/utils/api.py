@@ -34,6 +34,9 @@ def cast_values(value):
     if isinstance(value, dict):
         return cast_json_to_api_format(value)
 
+    if isinstance(value, str):
+        return snake_to_camel(value)
+
     if not isinstance(value, list):
         return value
 
