@@ -4,7 +4,7 @@ if sys.version_info.major == 2:
     reload(sys)
     sys.setdefaultencoding("UTF8")
 
-version = "0.1.0"
+version = "0.1.1"
 
 from .environment import Environment
 from .user import Organization, Project, User
