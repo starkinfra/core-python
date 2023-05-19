@@ -13,6 +13,8 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 
 ## [Unreleased]
+## Fixed
+- expand attribute case cast
 
 ## [0.1.0] - 2023-04-13
 ### Added
