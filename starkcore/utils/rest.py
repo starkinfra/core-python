@@ -1,4 +1,4 @@
-from requests import get, post, delete, patch
+from requests import get, post, delete, patch, put
 from ..utils.request import fetch
 from ..utils.api import endpoint, last_name, last_name_plural, api_json, from_api_json, cast_json_to_api_format
 
@@ -235,3 +235,20 @@ def post_raw(sdk_version, host, api_version, path, payload, user, language, time
         language=language,
         timeout=timeout,
     ).json()
+
+
+def put_raw(sdk_version, host, api_version, user, resource, entities, language, timeout, **query):
+    json = fetch(
+        host=host,
+        sdk_version=sdk_version,
+        user=user,
+        method=put,
+        path=endpoint(resource),
+        payload={last_name_plural(resource): [api_json(entity) for entity in entities]},
+        query=query,
+        api_version=api_version,
+        language=language,
+        timeout=timeout,
+    ).json()
+    entities = json[last_name_plural(resource)]
+    return [from_api_json(resource, entity) for entity in entities]
