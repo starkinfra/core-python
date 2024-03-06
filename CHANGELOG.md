@@ -13,6 +13,8 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 
 ## [Unreleased]
+
+## [0.2.1] - 2024-03-06
 ## Fixed
 - PUT method reference
 
