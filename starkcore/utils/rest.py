@@ -237,7 +237,8 @@ def post_raw(sdk_version, host, api_version, path, payload, user, language, time
     ).json()
 
 
-def put_raw(sdk_version, host, api_version, user, resource, entities, language, timeout, **query):
+
+def put_multi(sdk_version, host, api_version, user, resource, entities, language, timeout, **query):
     json = fetch(
         host=host,
         sdk_version=sdk_version,
