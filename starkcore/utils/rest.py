@@ -208,8 +208,8 @@ def patch_id(sdk_version, host, api_version, user, resource, id, payload, langua
     return from_api_json(resource, entity)
 
 
-def get_raw(sdk_version, host, api_version, path, user, language, timeout, **query):
-    return fetch(
+def get_raw(sdk_version, host, api_version, path, user, language, timeout, query):
+    return _parse_response_data(fetch(
         host=host,
         sdk_version=sdk_version,
         user=user,
@@ -217,13 +217,14 @@ def get_raw(sdk_version, host, api_version, path, user, language, timeout, **que
         path=path,
         query=query,
         api_version=api_version,
+        prefix="Joker",
         language=language,
         timeout=timeout,
-    ).json()
+    ))
 
 
 def post_raw(sdk_version, host, api_version, path, payload, user, language, timeout, **query):
-    return fetch(
+    return _parse_response_data(fetch(
         host=host,
         sdk_version=sdk_version,
         user=user,
@@ -232,10 +233,10 @@ def post_raw(sdk_version, host, api_version, path, payload, user, language, time
         payload=payload,
         query=query,
         api_version=api_version,
+        prefix="Joker",
         language=language,
         timeout=timeout,
-    ).json()
-
+    ))
 
 
 def put_multi(sdk_version, host, api_version, user, resource, entities, language, timeout, **query):
@@ -253,3 +254,57 @@ def put_multi(sdk_version, host, api_version, user, resource, entities, language
     ).json()
     entities = json[last_name_plural(resource)]
     return [from_api_json(resource, entity) for entity in entities]
+
+
+def patch_raw(sdk_version, host, api_version, path, payload, user, language, timeout, **query):
+    return _parse_response_data(fetch(
+        host=host,
+        sdk_version=sdk_version,
+        user=user,
+        method=patch,
+        path=path,
+        payload=payload,
+        query=query,
+        api_version=api_version,
+        prefix="Joker",
+        language=language,
+        timeout=timeout,
+    ))
+
+
+def put_raw(sdk_version, host, api_version, path, payload, user, language, timeout, **query):
+    return _parse_response_data(fetch(
+        host=host,
+        sdk_version=sdk_version,
+        user=user,
+        method=put,
+        path=path,
+        payload=payload,
+        query=query,
+        api_version=api_version,
+        prefix="Joker",
+        language=language,
+        timeout=timeout,
+    ))
+
+
+def delete_raw(sdk_version, host, api_version, path, payload, user, language, timeout, **query):
+    return _parse_response_data(fetch(
+        host=host,
+        sdk_version=sdk_version,
+        user=user,
+        method=delete,
+        path=path,
+        payload=payload,
+        query=query,
+        api_version=api_version,
+        prefix="Joker",
+        language=language,
+        timeout=timeout,
+    ))
+
+
+def _parse_response_data(response):
+    if response.headers.get("content-type") == "application/json":
+        return response.json()
+    return response.content
