@@ -12,9 +12,10 @@ from ..user.__publicuser import PublicUser
 
 class Response:
 
-    def __init__(self, status, content):
+    def __init__(self, status, content, headers):
         self.status = status
         self.content = content
+        self.headers = headers
 
     def json(self):
         return loads(self.content.decode("utf-8"))
