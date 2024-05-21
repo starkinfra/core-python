@@ -12,16 +12,17 @@ from ..user.__publicuser import PublicUser
 
 class Response:
 
-    def __init__(self, status, content):
+    def __init__(self, status, content, headers):
         self.status = status
         self.content = content
+        self.headers = headers
 
     def json(self):
         return loads(self.content.decode("utf-8"))
 
 
 def fetch(host, sdk_version, user, method, path, payload=None, query=None,
-          api_version="v2", language="en-US", timeout=15):
+          prefix="", api_version="v2", language="en-US", timeout=15):
     user = check_user(user)
     language = check_language(language)
 
@@ -38,7 +39,8 @@ def fetch(host, sdk_version, user, method, path, payload=None, query=None,
 
     url = "{base_url}/{path}{query}".format(base_url=url, path=path, query=urlencode(query))
 
-    agent = "Python-{major}.{minor}.{micro}-SDK-{host}-{sdk_version}".format(
+    agent = "{prefix}Python-{major}.{minor}.{micro}-SDK-{host}-{sdk_version}".format(
+        prefix=prefix + "-" if prefix else "",
         major=python_version.major,
         minor=python_version.minor,
         micro=python_version.micro,
