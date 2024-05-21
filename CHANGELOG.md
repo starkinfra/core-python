@@ -13,6 +13,8 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 
 ## [Unreleased]
+
+## [0.3.0] - 2024-05-21
 ### Added
 - delete_raw to rest utils
 - parse function to Rest methods
