@@ -208,7 +208,24 @@ def patch_id(sdk_version, host, api_version, user, resource, id, payload, langua
     return from_api_json(resource, entity)
 
 
-def get_raw(sdk_version, host, api_version, path, user, language, timeout, query):
+def put_multi(sdk_version, host, api_version, user, resource, entities, language, timeout, **query):
+    json = fetch(
+        host=host,
+        sdk_version=sdk_version,
+        user=user,
+        method=put,
+        path=endpoint(resource),
+        payload={last_name_plural(resource): [api_json(entity) for entity in entities]},
+        query=query,
+        api_version=api_version,
+        language=language,
+        timeout=timeout,
+    ).json()
+    entities = json[last_name_plural(resource)]
+    return [from_api_json(resource, entity) for entity in entities]
+
+
+def get_raw(sdk_version, host, api_version, path, user, language, timeout, query=None):
     return _parse_response_data(fetch(
         host=host,
         sdk_version=sdk_version,
@@ -237,23 +254,6 @@ def post_raw(sdk_version, host, api_version, path, payload, user, language, time
         language=language,
         timeout=timeout,
     ))
-
-
-def put_multi(sdk_version, host, api_version, user, resource, entities, language, timeout, **query):
-    json = fetch(
-        host=host,
-        sdk_version=sdk_version,
-        user=user,
-        method=put,
-        path=endpoint(resource),
-        payload={last_name_plural(resource): [api_json(entity) for entity in entities]},
-        query=query,
-        api_version=api_version,
-        language=language,
-        timeout=timeout,
-    ).json()
-    entities = json[last_name_plural(resource)]
-    return [from_api_json(resource, entity) for entity in entities]
 
 
 def patch_raw(sdk_version, host, api_version, path, payload, user, language, timeout, **query):
@@ -288,7 +288,7 @@ def put_raw(sdk_version, host, api_version, path, payload, user, language, timeo
     ))
 
 
-def delete_raw(sdk_version, host, api_version, path, payload, user, language, timeout, **query):
+def delete_raw(sdk_version, host, api_version, path, user, language, timeout, payload=None, **query):
     return _parse_response_data(fetch(
         host=host,
         sdk_version=sdk_version,

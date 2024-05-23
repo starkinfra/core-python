@@ -13,6 +13,10 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 
 ## [Unreleased]
+### Added
+- tests to all rest methods
+### Fixed
+- fetch Response class
 
 ## [0.3.0] - 2024-05-21
 ### Added
@@ -20,7 +24,7 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 - parse function to Rest methods
 
 ## [0.2.1] - 2024-03-06
-## Fixed
+### Fixed
 - PUT method reference
 
 ## [0.2.0] - 2024-03-05
@@ -28,7 +32,7 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 - put_raw to rest utils
 
 ## [0.1.1] - 2023-05-19
-## Fixed
+### Fixed
 - expand attribute case cast
 
 ## [0.1.0] - 2023-04-13

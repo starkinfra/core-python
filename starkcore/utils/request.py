@@ -66,7 +66,7 @@ def fetch(host, sdk_version, user, method, path, payload=None, query=None,
     except Exception as exception:
         raise UnknownError("{}: {}".format(exception.__class__.__name__, str(exception)))
 
-    response = Response(status=request.status_code, content=request.content)
+    response = Response(status=request.status_code, content=request.content, headers=request.headers)
 
     if response.status == 500:
         raise InternalServerError()
