@@ -13,6 +13,8 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 
 ## [Unreleased]
+
+## [0.3.1] - 2024-05-23
 ### Added
 - tests to all rest methods
 ### Fixed
