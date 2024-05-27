@@ -13,6 +13,8 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 
 ## [Unreleased]
+
+## [0.3.2] - 2024-05-27
 ### Fixed
 - get_public_key request parameters
 
