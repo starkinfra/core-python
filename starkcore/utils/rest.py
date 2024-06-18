@@ -225,8 +225,8 @@ def put_multi(sdk_version, host, api_version, user, resource, entities, language
     return [from_api_json(resource, entity) for entity in entities]
 
 
-def get_raw(sdk_version, host, api_version, path, user, language, timeout, query=None):
-    return _parse_response_data(fetch(
+def get_raw(sdk_version, host, api_version, path, user, language, timeout, prefix=None, query=None):
+    return fetch(
         host=host,
         sdk_version=sdk_version,
         user=user,
@@ -234,14 +234,14 @@ def get_raw(sdk_version, host, api_version, path, user, language, timeout, query
         path=path,
         query=query,
         api_version=api_version,
-        prefix="Joker",
+        prefix=prefix,
         language=language,
         timeout=timeout,
-    ))
+    )
 
 
-def post_raw(sdk_version, host, api_version, path, payload, user, language, timeout, **query):
-    return _parse_response_data(fetch(
+def post_raw(sdk_version, host, api_version, path, payload, user, language, timeout, prefix=None, **query):
+    return fetch(
         host=host,
         sdk_version=sdk_version,
         user=user,
@@ -250,14 +250,14 @@ def post_raw(sdk_version, host, api_version, path, payload, user, language, time
         payload=payload,
         query=query,
         api_version=api_version,
-        prefix="Joker",
+        prefix=prefix,
         language=language,
         timeout=timeout,
-    ))
+    )
 
 
-def patch_raw(sdk_version, host, api_version, path, payload, user, language, timeout, **query):
-    return _parse_response_data(fetch(
+def patch_raw(sdk_version, host, api_version, path, payload, user, language, timeout, prefix=None, **query):
+    return fetch(
         host=host,
         sdk_version=sdk_version,
         user=user,
@@ -266,14 +266,14 @@ def patch_raw(sdk_version, host, api_version, path, payload, user, language, tim
         payload=payload,
         query=query,
         api_version=api_version,
-        prefix="Joker",
+        prefix=prefix,
         language=language,
         timeout=timeout,
-    ))
+    )
 
 
-def put_raw(sdk_version, host, api_version, path, payload, user, language, timeout, **query):
-    return _parse_response_data(fetch(
+def put_raw(sdk_version, host, api_version, path, payload, user, language, timeout, prefix=None, **query):
+    return fetch(
         host=host,
         sdk_version=sdk_version,
         user=user,
@@ -282,14 +282,14 @@ def put_raw(sdk_version, host, api_version, path, payload, user, language, timeo
         payload=payload,
         query=query,
         api_version=api_version,
-        prefix="Joker",
+        prefix=prefix,
         language=language,
         timeout=timeout,
-    ))
+    )
 
 
-def delete_raw(sdk_version, host, api_version, path, user, language, timeout, payload=None, **query):
-    return _parse_response_data(fetch(
+def delete_raw(sdk_version, host, api_version, path, user, language, timeout, prefix=None, payload=None, **query):
+    return fetch(
         host=host,
         sdk_version=sdk_version,
         user=user,
@@ -298,13 +298,7 @@ def delete_raw(sdk_version, host, api_version, path, user, language, timeout, pa
         payload=payload,
         query=query,
         api_version=api_version,
-        prefix="Joker",
+        prefix=prefix,
         language=language,
         timeout=timeout,
-    ))
-
-
-def _parse_response_data(response):
-    if response.headers.get("content-type") == "application/json":
-        return response.json()
-    return response.content
+    )
