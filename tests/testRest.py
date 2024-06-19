@@ -5,6 +5,7 @@ from unittest import TestCase, main
 from tests.utils.user import exampleProject
 from datetime import datetime, timedelta
 from uuid import uuid4
+from tests import request_methods_prefix
 import time
 
 
@@ -139,7 +140,9 @@ class TestRestRaw(TestCase):
             user=exampleProject,
             language="pt-BR",
             timeout=15,
-        )
+            prefix=request_methods_prefix
+        ).json()
+
         self.assertEqual(10, len(request["invoices"]))
 
     def test_success_post(self):
@@ -160,7 +163,8 @@ class TestRestRaw(TestCase):
             user=exampleProject,
             language="pt-BR",
             timeout=15,
-        )
+        ).json()
+
         self.assertEqual(request["invoices"][0]["amount"], 100)
 
     def test_success_patch(self):
@@ -173,11 +177,12 @@ class TestRestRaw(TestCase):
             user=exampleProject,
             language="pt-BR",
             timeout=15,
-        )
+        ).json()
         example_id = initial_state["invoices"][0]["id"]
+
         amount = initial_state["invoices"][0]["amount"]
 
-        request = starkcore.utils.rest.patch_raw(
+        starkcore.utils.rest.patch_raw(
             path=f'/invoice/{example_id}/',
             payload={"amount": amount - amount},
             sdk_version="0.0.0",
@@ -196,7 +201,7 @@ class TestRestRaw(TestCase):
             user=exampleProject,
             language="pt-BR",
             timeout=15,
-        )
+        ).json()
         self.assertEqual(final_state["invoice"]["amount"], 0)
 
     def test_success_put(self):
@@ -219,7 +224,7 @@ class TestRestRaw(TestCase):
             user=exampleProject,
             language="pt-BR",
             timeout=15,
-        )
+        ).json()
 
         self.assertEqual(request["profiles"][0]["delay"], 0)
         self.assertEqual(request["profiles"][0]["interval"], "day")
@@ -252,9 +257,9 @@ class TestRestRaw(TestCase):
             user=exampleProject,
             language="en-US",
             timeout=15,
-        )
+        ).json()
 
-        request = starkcore.utils.rest.delete_raw(
+        starkcore.utils.rest.delete_raw(
             path=f'/transfer/{create["transfers"][0]["id"]}',
             sdk_version="0.0.0",
             host=StarkHost.bank,
@@ -273,13 +278,12 @@ class TestRestRaw(TestCase):
                 user=exampleProject,
                 language="pt-BR",
                 timeout=15,
-            )
+            ).json()
             self.assertEqual("canceled", request["transfer"]["status"])
         except Exception as e:
             err = str(e.errors[0]).split(":")[0]
             print(err)
             self.assertEqual("invalidTransfer", err)
-
 
 
 class TestRestPost(TestCase):

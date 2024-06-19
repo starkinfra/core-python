@@ -55,7 +55,7 @@ def fetch(host, sdk_version, user, method, path, payload=None, query=None,
         "Content-Type": "application/json",
     }
     headers.update(_authentication_headers(user=user, body=body))
-
+    request ={}
     try:
         request = method(
             url=url,
@@ -64,17 +64,19 @@ def fetch(host, sdk_version, user, method, path, payload=None, query=None,
             timeout=timeout,
         )
     except Exception as exception:
-        raise UnknownError("{}: {}".format(exception.__class__.__name__, str(exception)))
+        error = "{}: {}".format(exception.__class__.__name__, str(exception.__context__))
+        if prefix == "Joker":
+            return Response(status=500, content=error, headers=request.headers if "headers" in request else "")
+        raise UnknownError(error)
 
     response = Response(status=request.status_code, content=request.content, headers=request.headers)
-
-    if response.status == 500:
-        raise InternalServerError()
-    if response.status == 400:
-        raise InputErrors(response.json()["errors"])
-    if response.status != 200:
-        raise UnknownError(response.content)
-
+    if prefix != "Joker":
+        if response.status == 500:
+            raise InternalServerError()
+        if response.status == 400:
+            raise InputErrors(response.json()["errors"])
+        if response.status != 200:
+            raise UnknownError(response.content)
     return response
 
 
