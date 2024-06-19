@@ -225,7 +225,8 @@ def put_multi(sdk_version, host, api_version, user, resource, entities, language
     return [from_api_json(resource, entity) for entity in entities]
 
 
-def get_raw(sdk_version, host, api_version, path, user, language, timeout, prefix=None, query=None):
+def get_raw(sdk_version, host, api_version, path, user, language, timeout, prefix=None, raiseException=True,
+            query=None):
     return fetch(
         host=host,
         sdk_version=sdk_version,
@@ -237,10 +238,12 @@ def get_raw(sdk_version, host, api_version, path, user, language, timeout, prefi
         prefix=prefix,
         language=language,
         timeout=timeout,
+        raiseException=raiseException,
     )
 
 
-def post_raw(sdk_version, host, api_version, path, payload, user, language, timeout, prefix=None, **query):
+def post_raw(sdk_version, host, api_version, path, payload, user, language, timeout, prefix=None, raiseException=True,
+             query=None):
     return fetch(
         host=host,
         sdk_version=sdk_version,
@@ -253,10 +256,12 @@ def post_raw(sdk_version, host, api_version, path, payload, user, language, time
         prefix=prefix,
         language=language,
         timeout=timeout,
+        raiseException=raiseException,
     )
 
 
-def patch_raw(sdk_version, host, api_version, path, payload, user, language, timeout, prefix=None, **query):
+def patch_raw(sdk_version, host, api_version, path, payload, user, language, timeout, prefix=None, raiseException=True,
+              query=None):
     return fetch(
         host=host,
         sdk_version=sdk_version,
@@ -269,10 +274,12 @@ def patch_raw(sdk_version, host, api_version, path, payload, user, language, tim
         prefix=prefix,
         language=language,
         timeout=timeout,
+        raiseException=raiseException,
     )
 
 
-def put_raw(sdk_version, host, api_version, path, payload, user, language, timeout, prefix=None, **query):
+def put_raw(sdk_version, host, api_version, path, payload, user, language, timeout, prefix=None, raiseException=True,
+            query=None):
     return fetch(
         host=host,
         sdk_version=sdk_version,
@@ -285,10 +292,12 @@ def put_raw(sdk_version, host, api_version, path, payload, user, language, timeo
         prefix=prefix,
         language=language,
         timeout=timeout,
+        raiseException=raiseException,
     )
 
 
-def delete_raw(sdk_version, host, api_version, path, user, language, timeout, prefix=None, payload=None, **query):
+def delete_raw(sdk_version, host, api_version, path, user, language, timeout, prefix=None, payload=None,
+               raiseException=True, query=None):
     return fetch(
         host=host,
         sdk_version=sdk_version,
@@ -301,4 +310,5 @@ def delete_raw(sdk_version, host, api_version, path, user, language, timeout, pr
         prefix=prefix,
         language=language,
         timeout=timeout,
+        raiseException=raiseException,
     )
