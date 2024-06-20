@@ -13,6 +13,10 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 
 ## [Unreleased]
+### Changed
+- error parse by raw methods
+### Fixed
+- get public key method 
 
 ## [0.4.0] - 2024-06-19
 ### Changed
