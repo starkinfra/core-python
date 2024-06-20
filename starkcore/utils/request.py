@@ -22,7 +22,7 @@ class Response:
 
 
 def fetch(host, sdk_version, user, method, path, payload=None, query=None,
-          prefix="", api_version="v2", language="en-US", timeout=15):
+          prefix="", api_version="v2", language="en-US", timeout=15, raiseException=True):
     user = check_user(user)
     language = check_language(language)
 
@@ -55,7 +55,6 @@ def fetch(host, sdk_version, user, method, path, payload=None, query=None,
         "Content-Type": "application/json",
     }
     headers.update(_authentication_headers(user=user, body=body))
-    request ={}
     try:
         request = method(
             url=url,
@@ -65,18 +64,19 @@ def fetch(host, sdk_version, user, method, path, payload=None, query=None,
         )
     except Exception as exception:
         error = "{}: {}".format(exception.__class__.__name__, str(exception.__context__))
-        if prefix == "Joker":
-            return Response(status=500, content=error, headers=request.headers if "headers" in request else "")
-        raise UnknownError(error)
+        response = Response(status=0, content=error, headers={})
+    else:
+        response = Response(status=request.status_code, content=request.content, headers=request.headers)
 
-    response = Response(status=request.status_code, content=request.content, headers=request.headers)
-    if prefix != "Joker":
-        if response.status == 500:
-            raise InternalServerError()
-        if response.status == 400:
-            raise InputErrors(response.json()["errors"])
-        if response.status != 200:
-            raise UnknownError(response.content)
+    if not raiseException:
+        return response
+
+    if response.status == 500:
+        raise InternalServerError()
+    if response.status == 400:
+        raise InputErrors(response.json()["errors"])
+    if response.status != 200:
+        raise UnknownError(response.content)
     return response
 
 
