@@ -62,11 +62,10 @@ def fetch(host, sdk_version, user, method, path, payload=None, query=None,
             headers=headers,
             timeout=timeout,
         )
+        response = Response(status=request.status_code, content=request.content, headers=request.headers)
     except Exception as exception:
         error = "{}: {}".format(exception.__class__.__name__, str(exception.__context__))
         response = Response(status=0, content=error, headers={})
-    else:
-        response = Response(status=request.status_code, content=request.content, headers=request.headers)
 
     if not raiseException:
         return response

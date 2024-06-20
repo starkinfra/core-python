@@ -74,7 +74,7 @@ def _get_public_key(sdk_version, host, api_version, user, language, timeout, ref
         language=language,
         timeout=timeout,
         query={"limit": 1}
-    )["publicKeys"][0]["content"]
+    ).json()["publicKeys"][0]["content"]
     public_key = PublicKey.fromPem(pem)
     cache["stark-public-key"] = public_key
     return public_key
