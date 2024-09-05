@@ -12,7 +12,7 @@ class Project(User):
     each request or may be defined as the default user at the start (See README).
     ## Parameters (required):
     - id [string]: unique id required to identify project. ex: "5656565656565656"
-    - private_key [EllipticCurve.Project()]: PEM string of the private key linked to the project. ex: "-----BEGIN PUBLIC KEY-----\nMFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEyTIHK6jYuik6ktM9FIF3yCEYzpLjO5X/\ntqDioGM+R2RyW0QEo+1DG8BrUf4UXHSvCjtQ0yLppygz23z0yPZYfw==\n-----END PUBLIC KEY-----"
+    - private_key [EllipticCurve.PrivateKey()]: PEM string of the private key linked to the project. ex: "-----BEGIN PUBLIC KEY-----\nMFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEyTIHK6jYuik6ktM9FIF3yCEYzpLjO5X/\ntqDioGM+R2RyW0QEo+1DG8BrUf4UXHSvCjtQ0yLppygz23z0yPZYfw==\n-----END PUBLIC KEY-----"
     - environment [string]: environment where the project is being used. ex: "sandbox" or "production"
     ## Attributes (return-only):
     - name [string, default ""]: project name. ex: "MyProject"
