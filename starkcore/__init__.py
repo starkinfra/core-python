@@ -7,4 +7,4 @@ if sys.version_info.major == 2:
 version = "0.5.0"
 
 from .environment import Environment
-from .user import Organization, Project, User
+from .user import Organization, Project, MarketplaceApp, User
