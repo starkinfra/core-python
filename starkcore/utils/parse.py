@@ -61,7 +61,7 @@ def _is_signature_valid(content, signature, public_key):
 
 
 def _get_public_key(sdk_version, host, api_version, user, language, timeout, refresh=False):
-    public_key = cache.get("starkcore-public-key")
+    public_key = cache.get("stark-public-key")
     if public_key and not refresh:
         return public_key
 
