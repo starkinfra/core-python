@@ -13,6 +13,10 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 
 ## [Unreleased]
+
+## [0.6.0] - 2026-02-24
+### Added
+- MarketplaceApp user type
 ### Fixed
 - get public key caching
 
