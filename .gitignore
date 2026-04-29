@@ -9,6 +9,9 @@ env
 # specific folders
 temp
 
+# vscode
+.vscode/*
+
 # ignore info from all dependencies
 *.dist-info
 *.egg-info
