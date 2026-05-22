@@ -13,6 +13,8 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 
 ## [Unreleased]
+### Fixed
+- endpoint method
 
 ## [0.7.0] - 2026-04-29
 ### Changed
