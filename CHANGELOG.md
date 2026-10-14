@@ -13,7 +13,9 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 
 ## [Unreleased]
-### Fixed
+
+## [0.8.0] - 2026-10-15
+### Added
 - plural of resource names ending in "ch", "sh" or "x", which now take "es" (speech becomes speeches)
 
 ## [0.7.0] - 2026-04-29
