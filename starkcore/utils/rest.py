@@ -208,6 +208,23 @@ def patch_id(sdk_version, host, api_version, user, resource, id, payload, langua
     return from_api_json(resource, entity)
 
 
+def patch_multi(sdk_version, host, api_version, user, resource, entities, language, timeout, **query):
+    json = fetch(
+        host=host,
+        sdk_version=sdk_version,
+        user=user,
+        method=patch,
+        path=endpoint(resource),
+        payload={last_name_plural(resource): [api_json(entity) for entity in entities]},
+        query=query,
+        api_version=api_version,
+        language=language,
+        timeout=timeout,
+    ).json()
+    entities = json[last_name_plural(resource)]
+    return [from_api_json(resource, entity) for entity in entities]
+
+
 def put_multi(sdk_version, host, api_version, user, resource, entities, language, timeout, **query):
     json = fetch(
         host=host,
