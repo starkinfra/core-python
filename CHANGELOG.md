@@ -13,6 +13,8 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 
 ## [Unreleased]
+
+## [0.9.0] - 2026-11-24
 ### Added
 - patch_multi to the rest helpers, to update several resources in one PATCH request
 
